@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Reverse Engineering Project')
+    meta(name='author', content='Paul Wang')
+    link(href='/static/styles/styles.css', rel='stylesheet')
+    title Reverse Engineering
+
+    link(rel='icon' type='image/x-icon' href='/static/images/favicon.ico')
+    script(src='/socket.io/socket.io.js')
+
+  body
+    #main-app
+    block scripts
+      script(type='text/javascript').
+        var socket = io('/');
+      script(src="/static/scripts/bundle.js")
+
+// vim: set ts=2 sw=2 sts=2 et:

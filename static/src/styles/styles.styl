@@ -1,0 +1,257 @@
+// variables
+bg = rgb(26,26,29)
+
+// font-faces
+@font-face
+  font-family: 'refrigerator_deluxe-bold'
+  font-weight: bold
+  src url('/static/fonts/refrigeratorDelBold.otf') format('opentype')
+
+// mixins
+@import 'nib'
+
+// main part
+html, body
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  position: absolute
+  color: #fff
+  font-family: 'refrigerator_deluxe-bold'
+  font-size: 10px
+  line-height: 1.1em
+  letter-spacing: .03em
+  margin: 0
+  overflow: hidden
+  background-color: bg
+  transition(background .5s)
+  -webkit-font-smoothing: antialiased
+  text-transform: uppercase
+
+.stage
+  z-index: 100
+  position: absolute
+  height: 100%
+  width: 100%
+  left: 0
+  top: 0
+  transition(.7s)
+  & .title-bar {
+    position: fixed
+    display: block
+    top: 50px
+    left: 20%
+    font-size: 25px
+  }
+  & .mode-bar {
+    position: fixed
+    display: block
+    top: 50px
+    right: 20%
+    font-size: 25px
+  }
+
+
+.overlay
+  width: 100%
+  height: 100%
+  background-image: url('/static/images/stock.jpg')
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center
+  position: fixed
+  bottom: 100%
+  left: 0
+  z-index: 999
+  overflow-y: scroll
+  pointer-events: none
+  transform(translateY(0))
+  transition(.45s cubic-bezier($intenseeaseout))
+  text-align: center
+  &::after
+    position: absolute
+    display: block
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 5
+    background-color: rgba(41,39,45,.73)
+    background-image: url('/static/images/pattern.png')
+    content: ''
+  &.active
+    pointer-events: auto
+    transform(translateY(100%))
+  & .set-col
+    position: absolute
+    left: 0
+    right: 0
+    width: 560px
+    height: 100%
+    margin: 0 auto
+    z-index: 10
+    & .list-menu {
+      position: absolute
+      top: 0
+      bottom: 0
+      height: 350px
+      width: 100%
+      margin: auto 0
+      padding: 0
+      & .list-item {
+        box-sizing(border-box)
+        list-style-type: none
+        margin-bottom: 70px
+        & .close {
+          position: relative
+          display: block
+          height: 54px
+          width: 54px
+          border-radius(100px)
+          margin: 0 auto 30px
+          background-color: rgb(162, 161, 161)
+          &::after {
+            content: ""
+            position: absolute
+            top:5px
+            left:5px
+            background-color: rgba(41,39,45,.73)
+            width: 44px
+            height: 44px
+            border-radius(100px)
+            background-size: 120%
+            transition(.14s)
+          }
+          & .icon {
+            position: absolute
+            top:50%
+            left: 50%
+            margin-left: -12px
+            margin-top: -4px
+            z-index: 99
+            transition(.18s .1s)
+            &::before, &::after {
+              content: ""
+              position: absolute
+              top:0
+              left: 0
+              width: 25px
+              height: 7px
+              border-radius(2px)
+              background-color: rgb(222, 222, 222)
+              background-size: 30px 30px
+              transition(.3s cubic-bezier($smootheaseout))
+              transform-origin(50% 50%)
+            }
+            &::before {
+              transform(rotate(45deg))
+            }
+            &::after {
+              transform(rotate(-45deg))
+            }
+          }
+          &:hover {
+            & .icon {
+              &::before {
+                transform(rotate(-135deg))
+                transition-delay(.1s)
+              }
+              &::after {
+                transform(rotate(135deg))
+              }
+            }
+          }
+          &:hover {
+            transform(scale(1.07))
+            &::after {
+              transform(scale(.94))
+            }
+          }
+        }
+        & .flex-div {
+          display: flex
+          flex-direction: row
+          align-items: center
+          justify-content: center
+          position: relative
+          margin: 0 auto
+          .checkbox {
+            position: relative
+            display: block
+            height: 40px
+            width: 40px
+            border-radius(100px)
+            margin: 0 10px
+            background-color: rgb(162, 161, 161)
+            &::after {
+              content: ""
+              position: absolute
+              top:5px
+              left:5px
+              background-color: rgba(41,39,45,.73)
+              width: 30px
+              height: 30px
+              border-radius(100px)
+              background-size: 120%
+              transition(.14s)
+            }
+            & .icon {
+              position: absolute
+              top:50%
+              left: 50%
+              margin-left: -12px
+              margin-top: -4px
+              z-index: 99
+              transition(.18s .1s)
+              ^[-2] .on .icon::after {
+                content: ""
+                position: absolute
+                top: -5px
+                left: 3px
+                width: 18px
+                height: 18px
+                border-radius(10px)
+                background-color: rgb(162, 161, 161)
+                background-size: 30px 30px
+                transition(.3s cubic-bezier($smootheaseout))
+                transform-origin(50% 50%)
+              }
+            }
+            &:hover {
+              &.on .icon {
+                &::after {
+                  transform(scale(0.93))
+                }
+              }
+            }
+            &:hover {
+              transform(scale(1.07))
+              &::after {
+                transform(scale(.94))
+              }
+            }
+          }
+          & .list-item-text {
+            padding-top: 7px
+            font-size: 50px
+            font-weight: 400
+          }
+        }
+        & .list-item-text {
+          text-align: right
+          font-size: 14px
+          font-weight: 400
+        }
+      }
+    }
+
+
+
+
+.flip-flop
+  width: 70px
+  height: 60px
+  display: block
+  
+

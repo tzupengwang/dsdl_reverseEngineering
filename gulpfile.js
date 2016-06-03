@@ -26,17 +26,23 @@ const config = {
     srcPath: 'static/src/scripts',
     dest: 'static/dist/scripts',
     entries: [
+      'bundle.jsx',
+    ],
+    outputs: [
       'bundle.js',
     ],
-    common: 'common.js',
+  },
+  images: {
+    src: ['static/src/images/**/*'],
+    dest: 'static/dist/images',
   },
   fonts: {
-    src: [],
+    src: ['static/src/fonts/**/*'],
     dest: 'static/dist/fonts',
   },
 };
 
-config.scripts.src = path.join(config.scripts.srcPath, '/**/*.js');
+config.scripts.src = [path.join(config.scripts.srcPath, '/**/*.js'), path.join(config.scripts.srcPath, '/**/*.jsx')];
 
 // fonts
 gulp.task('fonts', () => {
@@ -72,9 +78,11 @@ gulp.task('scripts', () => {
     entries: config.scripts.entries,
     basedir: config.scripts.srcPath
   }).plugin(vinylify, {
-    outputs: config.scripts.entries,
+    outputs: config.scripts.outputs,
     common: config.scripts.common,
   })
+  .transform('babelify', { presets: ['es2015', 'react'] })
+  //.transform('uglifyify')
   .bundle()
   .on('error', function (err) {
     $.util.log(err.toString());
@@ -88,14 +96,25 @@ gulp.task('watch-scripts', () => {
   gulp.watch([config.scripts.src], ['scripts']);
 });
 
+// images
+gulp.task('images', () => {
+  gulp.src(config.images.src)
+  .pipe(gulp.dest(config.images.dest))
+  .pipe(browserSync.stream())
+});
+
+gulp.task('watch-images', () => {
+  gulp.watch([config.images.src], ['images']);
+});
+
 // tasks
-gulp.task('build', ['fonts', 'styles', 'scripts']);
-gulp.task('watch', ['watch-fonts', 'watch-styles', 'watch-scripts']);
+gulp.task('build', ['fonts', 'styles', 'scripts', 'images']);
+gulp.task('watch', ['watch-fonts', 'watch-styles', 'watch-scripts', 'watch-images']);
 
 gulp.task('nodemon', (cb) => {
-  
+
   let started = false;
-  
+
   return $.nodemon({
     script: 'server.js',
     ext: 'js',

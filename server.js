@@ -52,7 +52,7 @@ if (process.env.STATIC != 'static/dist' || !PRODUCTION)
   app.use('/static', express.static(path.join(__dirname, 'static/dist')));
 
 // view engine
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 if (!PRODUCTION)
@@ -77,6 +77,9 @@ const server = http.createServer(app);
 server.listen(app.get('port'), () => {
   logger.info(`Server started at: http://localhost:${app.get('port')}`);
 });
+
+// socket.io
+const io = require('socket.io')(server);
 
 exports.exit = (cb) => {
   logger.info('exiting...');

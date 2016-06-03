@@ -27,11 +27,16 @@
     "mongoose": "^4.4.5",
     "morgan": "^1.7.0",
     "pug": "^0.1.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "winston": "^2.2.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
     "browser-sync": "^2.11.1",
-    "browserify": "^13.0.0",
+    "browserify": "^13.0.1",
     "browserify-shim": "^3.8.12",
     "cssnano": "^3.5.2",
     "factor-vinylify": "^3.0.4",
@@ -44,6 +49,7 @@
     "gulp-util": "^3.0.7",
     "nib": "^1.1.0",
     "postcss-import": "^8.0.2",
-    "sanitize.css": "^3.2.0"
+    "sanitize.css": "^3.2.0",
+    "uglifyify": "^3.0.1"
   }
 }
