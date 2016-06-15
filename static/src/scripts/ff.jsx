@@ -1,13 +1,151 @@
 import React from 'react';
+import Draggable from 'react-draggable';
+import Port from './port.jsx';
+import { List } from 'immutable';
 
 class FF extends React.Component {
+  constructor() {
+    super();
+  }
+  componentDidMount() {
+  }
   render() {
-    return (
-      <div className='flip-flop'>
-        <button onClick={this.props.toggle_overlay}>Hello</button>
-      </div>
-    );
+    let { type , active , className , compid , focusedPort , colorList , clickPort , ...props } = this.props;
+    let ffclass = type;
+    if (active) ffclass += ' active';
+    if (type == 't-ff') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <Port className='port top-left' content='T' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-right' content='Q' type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+          <Port className='port bottom-right' content="Q'" type='output' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+        </div>
+        </div>
+      );
+    } else if (type == 'd-ff') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <Port className='port top-left' content='D' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-right' content='Q' type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+          <Port className='port bottom-right' content="Q'" type='output' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+        </div>
+        </div>
+      );
+    } else if (type == 'rs-ff') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <Port className='port top-left' content='R' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-right' content='Q' type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+          <Port className='port bottom-right' content="Q'" type='output' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port bottom-left' content='S' type='input' compid={compid} portid={3} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(3)}/>
+        </div>
+        </div>
+      );
+    } else if (type == 'jk-ff') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <Port className='port top-left' content='J' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-right' content='Q' type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+          <Port className='port bottom-right' content="Q'" type='output' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port bottom-left' content='K' type='input' compid={compid} portid={3} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(3)}/>
+        </div>
+        </div>
+      );
+    }
   }
 }
 
-export default FF;
+class LogicGate extends React.Component {
+  constructor() {
+    super();
+  }
+  componentDidMount() {
+  }
+  render() {
+    let { type , active , className , compid , focusedPort , colorList , clickPort , ...props } = this.props;
+    let ffclass = type;
+    if (active) ffclass += ' active';
+    if (type == 'and-gate') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <Port className='port top-left' content='I1' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port bottom-left' content='I2' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port center-right' content="O" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+        </div>
+        </div>
+      );
+    } else if (type == 'or-gate') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <span/>
+          <span/>
+          <Port className='port top-left' content='I1' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port bottom-left' content='I2' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port center-right' content="O" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+        </div>
+        </div>
+      );
+    } else if (type == 'not-gate') {
+      return (
+        <div { ...props } className={className}>
+        <div className={ffclass}>
+          <Port className='port center-left' content='Q' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port center-right' content="Q'" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+        </div>
+        </div>
+      );
+    }
+  }
+}
+
+export const Comp = (props) => {
+  let { group } = props ;
+  if ( group == 'flip-flop' ) {
+    return (
+      <FF
+        {...props}
+        compid={0}
+        focusedPort={0}
+        colorList={List(['rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)'])}
+        clickPort={() => {}}
+        />
+    );
+  } else if ( group == 'logic-gate' ) {
+    return (
+      <LogicGate
+        {...props}
+        compid={0}
+        focusedPort={0}
+        colorList={List(['rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)'])}
+        clickPort={() => {}}
+      />
+    );
+  }
+}
+export const DraggableComp = (props) => {
+  let { group } = props ;
+  let width = (window == undefined) ? 1000 : window.innerWidth;
+  if ( group == 'flip-flop' ) {
+    return (
+      <Draggable
+        bounds={'parent'}
+        defaultPosition={{x: width * 0.22, y: 100}}>
+        <FF {...props}/>
+      </Draggable>
+    );
+  } else if ( group == 'logic-gate' ) {
+    return (
+      <Draggable
+        bounds={'parent'}
+        defaultPosition={{x: width * 0.22, y: 100}}>
+        <LogicGate {...props}/>
+      </Draggable>
+    );
+  }
+}

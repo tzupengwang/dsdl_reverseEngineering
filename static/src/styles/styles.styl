@@ -24,18 +24,22 @@ html, body
   letter-spacing: .03em
   margin: 0
   overflow: hidden
-  background-color: bg
+  background-image: url('/static/images/grid.jpg')
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
   transition(background .5s)
   -webkit-font-smoothing: antialiased
   text-transform: uppercase
 
-.stage
+.stage {
   z-index: 100
   position: absolute
   height: 100%
   width: 100%
   left: 0
   top: 0
+  background-color: rgba(41,39,45,.83)
   transition(.7s)
   & .title-bar {
     position: fixed
@@ -50,7 +54,103 @@ html, body
     top: 50px
     right: 20%
     font-size: 25px
+    cursor: pointer
+    &:hover {
+      transform(scale(1.06))
+    }
   }
+  & .delete-bar {
+    position: fixed
+    display: block
+    bottom: 50px
+    left: 20%
+    font-size: 20px
+    cursor: pointer
+    &.non-active {
+      color: #616161
+      cursor: none
+    }
+    &.active {
+      color: white
+      &:hover {
+        transform(scale(1.06))
+      }
+    }
+  }
+  & .toolkit {
+    position: fixed
+    display: flex
+    width: 20%
+    height: 80%
+    top: 50px
+    left: 0
+    font-size: 20px
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    & .title {
+      width: 50%
+      border-bottom: 1px solid white
+      padding-bottom: 2px
+      margin-bottom: 10px
+    }
+    & .flip-flop, .logic-gate {
+      position: relative
+      margin: 5px
+    }
+  }
+  & .error-log {
+    position: fixed
+    display: flex
+    width: 20%
+    height: 65%
+    top: 130px
+    right: 0
+    font-size: 20px
+    flex-direction: column
+    align-items: center
+    justify-content: flex-head
+    & .title {
+      width: 50%
+      border-bottom: 1px solid white
+      padding-bottom: 2px
+      margin-bottom: 10px
+    }
+    & .error-box {
+      overflow: auto
+      width: 100%
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: flex-head
+      & .error {
+        background-color: rgba(128,128,128,0.7)
+        border-radius(3px)
+        width: 70%
+        color: #ff8d8d
+        position: relative
+        display: block
+        overflow-wrap: break-word
+        padding: 10px 4px 6px 7px
+        font-size: 17px
+        line-height: 20px
+        margin: 5px
+        text-transform: none
+      }
+    }
+  }
+  & .run-button {
+    position: fixed
+    display: block
+    bottom: 65px
+    right: 20%
+    font-size: 35px
+    cursor: pointer
+    &:hover {
+      transform(scale(1.09))
+    }
+  }
+}
 
 
 .overlay
@@ -247,11 +347,248 @@ html, body
     }
 
 
+.flip-flop, .logic-gate
+  display: block
+  position: absolute
+  overflow: hidden
 
+.port {
+  display: flex
+  position: absolute
+  align-items: center
+  justify-content: center
+  height: 37%
+  width: 15%
+  font-size: 19px
+  &:hover {
+    transform(scale(1.19))
+  }
+  &.active {
+    transform(scale(1.19))
+  }
+}
 
-.flip-flop
+.t-ff, .d-ff, .rs-ff, .jk-ff {
   width: 70px
   height: 60px
   display: block
-  
+  box-sizing(border-box)
+  border-radius(2px)
+  border(3px solid white)
+  transition(.15s cubic-bezier($intenseeaseout))
+  .port {
+    &.top-left {
+      top: 5px
+      left: 7px
+    }
+    &.top-right {
+      top: 5px
+      right: 7px
+    }
+    &.bottom-left {
+      bottom: 5px
+      left: 7px
+    }
+    &.bottom-right {
+      bottom: 5px
+      right: 7px
+    }
+  }
+  &:hover, &.active {
+    border(3px solid #b1b1b1)
+  }
+}
 
+
+.and-gate {
+  width: 70px
+  height: 60px
+  display: block
+  box-sizing(border-box)
+  border-radius(2px 30px 30px 2px)
+  border(3px solid white)
+  transition(.15s cubic-bezier($intenseeaseout))
+  .port {
+    &.top-left {
+      top: 5px
+      left: 7px
+    }
+    &.bottom-left {
+      bottom: 5px
+      left: 7px
+    }
+    &.center-right {
+      right: 7px
+      top: 19px
+    }
+  }
+  &:hover, &.active {
+    border(3px solid #b1b1b1)
+  }
+}
+
+.or-gate {
+  width: 70px
+  height: 60px
+  display: block
+  overflow: hidden
+  box-sizing(border-box)
+  //border-radius(2px 30px 30px 2px)
+  //border(3px solid white)
+  transition(.15s cubic-bezier($intenseeaseout))
+  &::before {
+    content: ''
+    position: absolute
+    display: block
+    box-sizing(border-box)
+    width: 120px
+    height: 120px
+    left: -110px
+    top: -30px
+    border-radius(50%)
+    border(3px solid white)
+  }
+  & span {
+    display: block
+    position: absolute
+    height: 50%
+    width: 100%
+    overflow: hidden
+    &::before {
+      content: ''
+      position: absolute
+      display: block
+      border-right: 3px solid white
+      height: 200%
+      width: 100%
+    }
+    &:nth-child(1) {
+      top: 0
+      &::before {
+        border-top: 3px solid white
+        border-top-right-radius: 50px
+      }
+    }
+    &:nth-child(2) {
+      bottom: 0
+      &::before {
+        bottom: 0
+        border-bottom: 3px solid white
+        border-bottom-right-radius: 50px
+      }
+    }
+  }
+  .port {
+    &.top-left {
+      top: 5px
+      left: 12px
+    }
+    &.bottom-left {
+      bottom: 5px
+      left: 12px
+    }
+    &.center-right {
+      right: 10px
+      top: 19px
+    }
+  }
+  &:hover, &.active {
+    &::before {
+      border(3px solid #b1b1b1)
+    }
+    & span {
+      &::before {
+        border-right: 3px solid #b1b1b1
+      }
+      &:nth-child(1)::before {
+        border-top: 3px solid #b1b1b1
+      }
+      &:nth-child(2)::before {
+        border-bottom: 3px solid #b1b1b1
+      }
+    }
+  }
+}
+
+.not-gate {
+  width: 70px
+  height: 60px
+  display: block
+  overflow: hidden
+  box-sizing(border-box)
+  //border-radius(2px 30px 30px 2px)
+  //border(3px solid white)
+  transition(.15s cubic-bezier($intenseeaseout))
+  &::before {
+    content: ''
+    position: absolute
+    display: block
+    box-sizing(border-box)
+    width: 120px
+    height: 120px
+    left: -110px
+    top: -30px
+    border-radius(50%)
+    border(3px solid white)
+  }
+  & span {
+    display: block
+    position: absolute
+    height: 50%
+    width: 100%
+    overflow: hidden
+    &::before {
+      content: ''
+      position: absolute
+      display: block
+      border-right: 3px solid white
+      height: 200%
+      width: 100%
+    }
+    &:nth-child(1) {
+      top: 0
+      &::before {
+        border-top: 3px solid white
+        border-top-right-radius: 50px
+      }
+    }
+    &:nth-child(2) {
+      bottom: 0
+      &::before {
+        bottom: 0
+        border-bottom: 3px solid white
+        border-bottom-right-radius: 50px
+      }
+    }
+  }
+  .port {
+    &.top-left {
+      top: 5px
+      left: 12px
+    }
+    &.bottom-left {
+      bottom: 5px
+      left: 12px
+    }
+    &.center-right {
+      right: 10px
+      top: 19px
+    }
+  }
+  &:hover, &.active {
+    &::before {
+      border(3px solid #b1b1b1)
+    }
+    & span {
+      &::before {
+        border-right: 3px solid #b1b1b1
+      }
+      &:nth-child(1)::before {
+        border-top: 3px solid #b1b1b1
+      }
+      &:nth-child(2)::before {
+        border-bottom: 3px solid #b1b1b1
+      }
+    }
+  }
+}

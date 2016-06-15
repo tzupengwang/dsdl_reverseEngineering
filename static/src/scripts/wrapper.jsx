@@ -28,7 +28,6 @@ class Wrapper extends React.Component {
       this.setState({mode: x});
   }
   render() {
-    console.log( 'render', this.state.overlay_active ) ;
     return (
       <div className='wrapper'>
         <Stage

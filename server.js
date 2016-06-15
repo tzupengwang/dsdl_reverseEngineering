@@ -80,6 +80,8 @@ server.listen(app.get('port'), () => {
 
 // socket.io
 const io = require('socket.io')(server);
+const handler = require('./handler');
+handler.handle(io);
 
 exports.exit = (cb) => {
   logger.info('exiting...');

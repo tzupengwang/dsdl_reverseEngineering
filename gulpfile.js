@@ -81,7 +81,10 @@ gulp.task('scripts', () => {
     outputs: config.scripts.outputs,
     common: config.scripts.common,
   })
-  .transform('babelify', { presets: ['es2015', 'react'] })
+  .transform('babelify', {
+    presets: ['es2015', 'react'],
+    plugins: ['transform-object-rest-spread'],
+  })
   //.transform('uglifyify')
   .bundle()
   .on('error', function (err) {
