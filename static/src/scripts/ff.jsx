@@ -37,10 +37,10 @@ class FF extends React.Component {
       return (
         <div { ...props } className={className}>
         <div className={ffclass}>
-          <Port className='port top-left' content='R' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-left' content='S' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
           <Port className='port top-right' content='Q' type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
           <Port className='port bottom-right' content="Q'" type='output' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
-          <Port className='port bottom-left' content='S' type='input' compid={compid} portid={3} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(3)}/>
+          <Port className='port bottom-left' content='R' type='input' compid={compid} portid={3} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(3)}/>
         </div>
         </div>
       );
