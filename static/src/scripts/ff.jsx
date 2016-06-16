@@ -73,8 +73,8 @@ class LogicGate extends React.Component {
       return (
         <div { ...props } className={className}>
         <div className={ffclass}>
-          <Port className='port top-left' content='I1' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
-          <Port className='port bottom-left' content='I2' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-left' content='X1' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port bottom-left' content='X2' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
           <Port className='port center-right' content="O" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
         </div>
         </div>
@@ -85,8 +85,8 @@ class LogicGate extends React.Component {
         <div className={ffclass}>
           <span/>
           <span/>
-          <Port className='port top-left' content='I1' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
-          <Port className='port bottom-left' content='I2' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
+          <Port className='port top-left' content='X1' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port bottom-left' content='X2' type='input' compid={compid} portid={2} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(2)}/>
           <Port className='port center-right' content="O" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
         </div>
         </div>
@@ -95,8 +95,8 @@ class LogicGate extends React.Component {
       return (
         <div { ...props } className={className}>
         <div className={ffclass}>
-          <Port className='port center-left' content='Q' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
-          <Port className='port center-right' content="Q'" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+          <Port className='port center-left' content='X' type='input' compid={compid} portid={1} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(1)}/>
+          <Port className='port center-right' content="X'" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
         </div>
         </div>
       );
@@ -127,7 +127,7 @@ class Output extends React.Component {
     return (
       <div { ...props } className={className}>
       <div className={ffclass}>
-        <Port className='port center-left' content="I" type='input' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+        <Port className='port center-left' content="X" type='input' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
       </div>
       </div>
     );

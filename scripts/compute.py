@@ -78,6 +78,12 @@ def getcolorstate(x):
         res = 1 - i1
         colorState[x] = res
         return colorState[x]
+    elif (tcomp['type'] == 'input'):
+        print("Moore Machine output should not depend on input");
+        sys.exit(-1);
+    else :
+        print("Unknown Error");
+        sys.exit(-1);
 
 ret = dict()
 
@@ -149,6 +155,18 @@ elif (data['machineType'] == 'Moore Machine'):
             else:
                 state += '0'
         ret[state] = dict()
+        colorState = [-1 for i in range(colorMax + 5)]
+        for idd , comp in zip(range(len(data['ffs'])), data['ffs']):
+            curstate = 1 if (state[idd] == '1') else 0
+            colorState[comp['colorList'][0]] = curstate ;
+            colorState[comp['colorList'][1]] = 1 - curstate ;
+        nout = ""
+        for idd , comp in zip(range(len(data['outputs'])), data['outputs']):
+            i1 = getcolorstate(comp['colorList'][0])
+            nout += "1" if (i1 == 1) else "0"
+
+        ret[state]["output"] = nout
+
         for inputMask in range(0, 1 << data['numInput']):
             inp = ""
             for i in range(0, data['numInput']):
@@ -167,7 +185,7 @@ elif (data['machineType'] == 'Moore Machine'):
                 curstate = 1 if (inp[idd] == '1') else 0
                 colorState[comp['colorList'][0]] = curstate ;
 
-            nxtstate , nout = "" , ""
+            nxtstate = ""
             for idd , comp in zip(range(len(data['ffs'])), data['ffs']):
                 curstate = 1 if (state[idd] == '1') else 0
                 if (comp['type'] == 'd-ff'):
@@ -194,11 +212,8 @@ elif (data['machineType'] == 'Moore Machine'):
                     elif (not i1 and i2): nxtstate += "0"
                     elif (not i1 and not i2): nxtstate += "1" if (curstate == 1) else "0"
 
-            for idd , comp in zip(range(len(data['outputs'])), data['outputs']):
-                i1 = getcolorstate(comp['colorList'][0])
-                nout += "1" if (i1 == 1) else "0"
 
-            ret[state][inp] = {'nxtstate': nxtstate, 'output': nout}
+            ret[state][inp] = {'nxtstate': nxtstate}
 else :
     print('Invalid Machine Type')
     sys.exit(-1)

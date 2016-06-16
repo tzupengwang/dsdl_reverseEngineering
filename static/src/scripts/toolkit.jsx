@@ -32,6 +32,10 @@ class Toolkit extends React.Component {
           addComp('logic-gate', 'or-gate');
           e.stopPropagation();
         }}/>
+        <Comp className='logic-gate' active={false} group='logic-gate' type='not-gate' onClick={(e) => {
+          addComp('logic-gate', 'not-gate');
+          e.stopPropagation();
+        }}/>
         <Comp className='input' active={false} group='input' type='inputg' onClick={(e) => {
           addComp('input', 'inputg');
           e.stopPropagation();
