@@ -11,7 +11,7 @@ class Port extends React.Component {
     return (
       <div className={className} {...props} style={{color: color}} onClick={(e) => {
         clickPort({type: type, compid: compid, portid: portid});
-        e.stopPropagation();
+        //e.stopPropagation();
       }}>
         <strong>{ content }</strong>
       </div>

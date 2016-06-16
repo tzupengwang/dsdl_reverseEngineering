@@ -112,7 +112,7 @@ class Input extends React.Component {
     return (
       <div { ...props } className={className}>
       <div className={ffclass}>
-        <Port className='port center-right' content="O" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+        <Port className='port center-right' content="input" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
       </div>
       </div>
     );
@@ -127,7 +127,7 @@ class Output extends React.Component {
     return (
       <div { ...props } className={className}>
       <div className={ffclass}>
-        <Port className='port center-left' content="X" type='input' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+        <Port className='port center-left' content="output" type='input' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
       </div>
       </div>
     );
