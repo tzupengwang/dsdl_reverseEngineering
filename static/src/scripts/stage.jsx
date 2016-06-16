@@ -67,6 +67,12 @@ class Stage extends React.Component {
       case 'not-gate':
         colorList = colorList.push(this.genNewColor(), this.colors.first());
         break;
+      case 'inputg':
+        colorList = colorList.push(this.genNewColor());
+        break;
+      case 'outputg':
+        colorList = colorList.push(this.colors.first());
+        break;
     }
     this.setState( {comps: this.state.comps.set(this.key_counter ++, {group: group, type: type, colorList: colorList})} );
   }
@@ -87,12 +93,17 @@ class Stage extends React.Component {
   }
 
   printResult(result) {
+    //console.log(result)
+    result = eval('(' + result + ')')
+    this.props.set_result(result)
+    console.log(result)
   }
 
   compute() {
     this.addLog('Start computing');
     if (socket) {
       let data = {
+        machineType: (this.props.cur_mode == 1) ? 'Mealy Machine' : 'Moore Machine',
         numInput: 0,
         numOutput: 0,
         numFF: 0,
@@ -120,14 +131,14 @@ class Stage extends React.Component {
             break;
           case 'input':
             data.numInput += 1;
-            data.input.push({
+            data.inputs.push({
               type: comp.type,
               colorList: comp.colorList.toArray().map(x => this.colors.indexOf(x)),
             });
             break;
           case 'output':
             data.numOutput += 1;
-            data.output.push({
+            data.outputs.push({
               type: comp.type,
               colorList: comp.colorList.toArray().map(x => this.colors.indexOf(x)),
             });
@@ -138,6 +149,7 @@ class Stage extends React.Component {
         if (err) {
           this.addLog(err);
         } else {
+          this.addLog('Computed successfully');
           this.printResult(result);
         }
       });

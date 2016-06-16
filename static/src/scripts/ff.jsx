@@ -104,6 +104,36 @@ class LogicGate extends React.Component {
   }
 }
 
+class Input extends React.Component {
+  render() {
+    let { type , active , className , compid , focusedPort , colorList , clickPort , ...props } = this.props;
+    let ffclass = type;
+    if (active) ffclass += ' active';
+    return (
+      <div { ...props } className={className}>
+      <div className={ffclass}>
+        <Port className='port center-right' content="O" type='output' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+      </div>
+      </div>
+    );
+  }
+}
+
+class Output extends React.Component {
+  render() {
+    let { type , active , className , compid , focusedPort , colorList , clickPort , ...props } = this.props;
+    let ffclass = type;
+    if (active) ffclass += ' active';
+    return (
+      <div { ...props } className={className}>
+      <div className={ffclass}>
+        <Port className='port center-left' content="I" type='input' compid={compid} portid={0} focusedPort={focusedPort} clickPort={clickPort} color={colorList.get(0)}/>
+      </div>
+      </div>
+    );
+  }
+}
+
 export const Comp = (props) => {
   let { group } = props ;
   if ( group == 'flip-flop' ) {
@@ -119,6 +149,26 @@ export const Comp = (props) => {
   } else if ( group == 'logic-gate' ) {
     return (
       <LogicGate
+        {...props}
+        compid={0}
+        focusedPort={0}
+        colorList={List(['rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)'])}
+        clickPort={() => {}}
+      />
+    );
+  } else if ( group == 'input' ) {
+    return (
+      <Input
+        {...props}
+        compid={0}
+        focusedPort={0}
+        colorList={List(['rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)', 'rgb(255, 255, 255)'])}
+        clickPort={() => {}}
+      />
+    );
+  } else if ( group == 'output' ) {
+    return (
+      <Output
         {...props}
         compid={0}
         focusedPort={0}
@@ -145,6 +195,22 @@ export const DraggableComp = (props) => {
         bounds={'parent'}
         defaultPosition={{x: width * 0.22, y: 100}}>
         <LogicGate {...props}/>
+      </Draggable>
+    );
+  } else if ( group == 'input' ) {
+    return (
+      <Draggable
+        bounds={'parent'}
+        defaultPosition={{x: width * 0.22, y: 100}}>
+        <Input {...props}/>
+      </Draggable>
+    );
+  } else if ( group == 'output' ) {
+    return (
+      <Draggable
+        bounds={'parent'}
+        defaultPosition={{x: width * 0.22, y: 100}}>
+        <Output {...props}/>
       </Draggable>
     );
   }
